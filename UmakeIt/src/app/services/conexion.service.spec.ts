@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlatosService } from './platos.service';
+import { ConexionService } from './conexion.service';
 
-describe('PlatosService', () => {
+describe('ConexionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PlatosService = TestBed.get(PlatosService);
+    const service: ConexionService = TestBed.get(ConexionService);
     expect(service).toBeTruthy();
   });
 });

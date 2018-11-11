@@ -18,18 +18,8 @@
       <td>{{plato.nombre}}</td>
       <td>Precio: {{plato.precio}}  Bss</td>
       <td>{{plato.img}}</td>
-      <td><input type="submit" value="Agregar"></td>
-      <td><input type="submit" value="Editar"></td>
-      <td><input type="submit" value="Eliminar"></td>
+      <td input type="button" value="Agregar">Agregar</td>
     </tr>
   </tbody>
 </table>
-<form (ngSubmit)="Agregar()" >
-  <h2>Agregar Producto</h2>
-  <input type="text" placeholder="&#128272; Nombre" name="nombre" [(ngModel)]="platos.nombre">
-  <input type="text" placeholder="&#128272; Precio" name="precio" [(ngModel)]="platos.precio">
-  <button type="submit" >Agregar Producto</button>
- 
-  
-</form>
 </body>
