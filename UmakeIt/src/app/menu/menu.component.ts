@@ -13,8 +13,16 @@ export class MenuComponent implements OnInit {
   /*items:any;*/
   platos:Platosinterface={
     nombre:'',
-    precio:0
+    
   }
+  
+  item:Platosinterface[];
+  editState: boolean=false;
+  platoEdit: Platosinterface;
+  clearState: boolean;
+
+
+  
 
   constructor(private conexion:ConexionService) {
     /*this.conexion.listaItem().subscribe(item=>{
@@ -24,8 +32,10 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.conexion.getPlatos().subscribe(platos=>{
-      console.log(platos);
+    this.conexion.getPlatos().subscribe(item=>{
+      this.item=item;
+      console.log(item);
+    
     
 
     })
@@ -34,7 +44,21 @@ export class MenuComponent implements OnInit {
   agregar(myform:NgForm){
     this.conexion.addPlato(this.platos);
     this.platos.nombre= '';
+    this.platos.precio=0;
     
+  }
+
+  editPlato(event, plato:Platosinterface){
+    this.editState=true;
+    this.platoEdit=plato;
+  }
+
+  updatePlato(platos: Platosinterface){
+    this.conexion.updatePlato(platos);
+  }
+
+  deletePlato(event, platos:Platosinterface){
+    this.conexion.deletePlato(platos);
   }
 
 }

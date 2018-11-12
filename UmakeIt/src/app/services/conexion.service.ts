@@ -4,7 +4,7 @@ import { Platosinterface } from '../Models/PlatosInterface';
 import { Observable } from 'rxjs';
 import { map} from 'rxjs/operators';
 
-export interface Item { name: string; }
+/*export interface Item { name: string; }*/
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,12 @@ export class ConexionService {
   constructor(private afs: AngularFirestore) {
    /* this.itemsCollection = afs.collection<Item>('platos');
     this.items = this.itemsCollection.valueChanges();*/
-    this.platos= afs.collection('platos').valueChanges();
+    this.PlatosCollection= afs.collection<Platosinterface>('platos');
+    this.platos = this.PlatosCollection.snapshotChanges().pipe(map(actions => actions.map(a =>{
+      const data=a.payload.doc.data() as Platosinterface;
+      const id=a.payload.doc.id;
+      return {id, ...data};
+    })));
    }
 
    getPlatos(){
@@ -37,11 +42,13 @@ export class ConexionService {
 
    }
 
-   deletePlato(){
-
+   deletePlato(platos: Platosinterface){
+    this.platosDoc=this.afs.doc(`platos/${platos.id}`);
+    this.platosDoc.delete();
    }
 
-   updatePlato(){
-     
+   updatePlato(platos: Platosinterface){
+    this.platosDoc=this.afs.doc(`platos/${platos.id}`);
+    this.platosDoc.update(platos);
    }
 }
